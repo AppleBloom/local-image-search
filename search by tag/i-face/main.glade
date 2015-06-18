@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<interface>
+  <requires lib="gtk+" version="2.16"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkWindow" id="window1">
+    <property name="visible">True</property>
+    <property name="window_position">center</property>
+    <signal name="destroy" handler="on_destroy"/>
+    <child>
+      <object class="GtkVBox" id="vbox1">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkAlignment" id="alignment1">
+            <property name="visible">True</property>
+            <property name="top_padding">8</property>
+            <property name="left_padding">8</property>
+            <property name="right_padding">8</property>
+            <child>
+              <object class="GtkEntry" id="query_entry">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="invisible_char">&#x25CF;</property>
+		<property name="tooltip_text" translatable="no">command line</property>
+                <signal name="activate" handler="on_return"/>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolledwindow1">
+            <property name="height_request">400</property>
+	    <property name="width_request">400</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="border_width">8</property>
+            <property name="hscrollbar_policy">automatic</property>
+            <property name="vscrollbar_policy">automatic</property>
+            <child>
+              <object class="GtkIconView" id="image_view">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">image_store</property>
+                <property name="pixbuf_column">0</property>
+                <property name="markup_column">1</property>
+		<property name="tooltip_column">2</property>
+		<signal name="item_activated" handler="on_poke"/>
+		<signal name="selection_changed" handler="on_select"/>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHBox" id="hbox1">
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkButton" id="button1">
+                <property name="label" translatable="yes">&lt;</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="on_move_left"/>
+              </object>
+              <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBox" id="sel_action_box">
+                <property name="visible">True</property>
+		<property name="focus_on_click">False</property>
+                <property name="model">sel_action_store</property>
+                <property name="tooltip_text" translatable="no">on select</property>
+		<signal name="changed" handler="on_sel_action_changed"/>
+		<child>
+                  <object class="GtkCellRendererText" id="renderer1"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+	    <child>
+              <object class="GtkComboBox" id="act_action_box">
+                <property name="visible">True</property>
+		<property name="focus_on_click">False</property>
+                <property name="model">act_action_store</property>
+                <property name="tooltip_text" translatable="no">on activate</property>
+		<signal name="changed" handler="on_act_action_changed"/>
+		<child>
+                  <object class="GtkCellRendererText" id="renderer2"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
+              </object>
+              <packing>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button3">
+                <property name="label" translatable="yes">&gt;</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="on_move_right"/>
+              </object>
+              <packing>
+                <property name="position">3</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkStatusbar" id="statusbar">
+            <property name="visible">True</property>
+            <property name="spacing">2</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkListStore" id="image_store">
+    <columns>
+      <!-- column-name pixBuf -->
+      <column type="GdkPixbuf"/>
+      <!-- column-name label -->
+      <column type="gchararray"/>
+      <!-- column-name tooltip -->
+      <column type="gchararray"/>
+      <!-- column-name URL -->
+      <column type="gchararray"/>
+      <!-- column-name path -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="sel_action_store">
+    <columns>
+      <!-- column-name label -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="act_action_store">
+    <columns>
+      <!-- column-name label -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="word_store">
+    <columns>
+      <!-- column-name txt -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+</interface>
